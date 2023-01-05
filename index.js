@@ -9,58 +9,168 @@ const getComputerChoice =()=>{
 
    return randomRes
 }
+let drawCount=0
+let playerWin= 0
+let computerWin=0
+const playRound=(playerSelection, computerSelection)=>{
 
 
-const playRound=(playerSection, computerSelection)=>{
+  
 
-    playerSection = playerSection.toLowerCase()
+    playerSelection = playerSelection.toLowerCase()
     //rock
-    if (playerSection === "rock" && computerSelection==="rock"){
-        console.log('draw')
+    if (playerSelection === "rock" && computerSelection==="rock"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'DRAW';
+        drawCount +=1
     }
-    if (playerSection === "rock" && computerSelection==="paper"){
-        console.log("You Lose! Paper beats Rock")
+    if (playerSelection === "rock" && computerSelection==="paper"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'You Lose! Paper beats Rock';
+        computerWin += 1
     }
-    if (playerSection === "rock" && computerSelection==="scissors"){
-        console.log("You Win! Scissors beats Rock")
+    if (playerSelection === "rock" && computerSelection==="scissors"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'You Win! Scissors beats Rock';
+        playerWin +=1
+      
     }
 
     //paper
-    if (playerSection === "paper" && computerSelection==="paper"){
-        console.log('draw')
+    if (playerSelection === "paper" && computerSelection==="paper"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'Draw';
+        drawCount +=1
     }
-    if (playerSection === "paper" && computerSelection==="rock"){
-        console.log("You Win! Paper beats Rock")
+    if (playerSelection === "paper" && computerSelection==="rock"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'You Win! Paper beats Rock';
+        playerWin +=1
+        
     }
-    if (playerSection === "paper" && computerSelection==="scissors"){
-        console.log("You Lose! Scissors beats Paper")
+    if (playerSelection === "paper" && computerSelection==="scissors"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'You Lose! Scissors beats Paper';
+   
+        computerWin += 1
     }
 
     //scissors
-    if (playerSection === "scissors" && computerSelection==="scissors"){
-        console.log('draw')
+    if (playerSelection === "scissors" && computerSelection==="scissors"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'Draw';
+        drawCount +=1
     }
-    if (playerSection === "scissors" && computerSelection==="rock"){
-        console.log("You Lose! Rock beats Scissors")
+    if (playerSelection === "scissors" && computerSelection==="rock"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'You Lose! Rock beats Scissors';
+   
+        computerWin += 1
     }
-    if (playerSection === "scissors" && computerSelection==="paper"){
-        console.log("You Win! Scissors beats Paper")
+    if (playerSelection === "scissors" && computerSelection==="paper"){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'You Win! Scissors beats Paper';
+        playerWin +=1
+   
     }
+
+    if(roundCount>=5){
+    rock.setAttribute('disabled','')
+    paper.setAttribute('disabled','')
+    scissors.setAttribute('disabled','')
+
+        winner()
+    }
+
 }
 
 
-// console.log(playerSelection)
-// console.log(computerSelection)
+let playerSelection =""
+const rock = document.querySelector('#btn-rock')
+rock.addEventListener('click',()=>{
+     playerSelection = "rock"
+  game()
+})
 
+const paper = document.querySelector('#btn-paper')
+paper.addEventListener('click',()=>{
+     playerSelection = "paper"
+  game()
+})
+
+const scissors = document.querySelector('#btn-scissors')
+scissors.addEventListener('click',()=>{
+   playerSelection = "scissors"
+  game()
+
+})
+//5 rounds counter
+let roundCount = 0;
 
 const game=()=>{
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("your move (rock, paper, scissors)");
-const computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection)
-   
-     }
+    roundCount+=1;
 
-     console.log(playRound(playerSelection, computerSelection));
+  if (roundCount<=5){
+    const playerSelected = playerSelection
+    const computerSelection = getComputerChoice();
+    playRound(playerSelected, computerSelection)
+console.log(roundCount)
+  }
 }
-game()
+//play start restart
+const startRestart = document.querySelector('#start-restart')
+startRestart.textContent="Start Game"
+
+startRestart.addEventListener('click',()=>{
+    rock.removeAttribute('disabled')
+    paper.removeAttribute('disabled')
+    scissors.removeAttribute('disabled')
+    playRoundCount(roundCount)
+
+})
+
+const playRoundCount=(roundCounter)=>{
+    if (roundCounter>=5){
+        document.getElementsByClassName("round-winner")[0].innerHTML = ""
+        rock.removeAttribute('disabled')
+        paper.removeAttribute('disabled')
+        scissors.removeAttribute('disabled')
+        roundCount=0;
+        
+    }
+
+    if(roundCounter<=5){
+        startRestart.textContent="Game in progress"
+    }
+}
+//check winner
+const winner = ()=>{
+
+    if(playerWin>computerWin){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'You beat the computer';
+    } 
+
+    if(computerWin>playerWin){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'The computer beat you';
+    } 
+
+    if(computerWin===playerWin){
+        document.getElementsByClassName("round-winner")[0].innerHTML = 'Draw';
+    } 
+
+    console.log("computer:",computerWin,"player:",playerWin,"draw:",drawCount)
+    drawCount=0
+    playerWin= 0
+   computerWin=0
+    startRestart.textContent="Restart Game"
+}
+//quit game
+const quitGame = document.querySelector('#quit-game')
+
+quitGame.addEventListener('click',()=>{
+    clearGame()
+
+})
+
+
+const clearGame=()=>{
+    startRestart.textContent="Start Game"
+    drawCount=0
+    playerWin= 0
+   computerWin=0
+   roundCount=0;
+   rock.setAttribute('disabled','')
+   paper.setAttribute('disabled','')
+   scissors.setAttribute('disabled','')
+}
