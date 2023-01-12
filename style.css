@@ -1,0 +1,66 @@
+h1 {
+    text-align: center;
+}
+
+.player-options{
+    text-align: center;
+}
+
+.game-options{
+    margin-top: 40px;
+    text-align: center;
+}
+
+.game-pad{
+    display: flex;
+}
+
+#computer-choice-img{
+    max-width: 300px;
+}
+
+.player-options{
+    flex:1
+}
+.computer-choice{
+    text-align: center;
+    flex:1
+}
+.player-option-image img{
+  max-width: 200px;
+}
+
+#start-restart,#quit-game{
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#start-restart{
+    background-color: royalblue;
+
+}
+#quit-game{
+background-color: red;
+}
+
+.round-winner,.game-winner{
+    border-radius: 10px;
+    border: double #000;
+    max-width: 500px;
+    text-align: center;
+    padding:20px;
+    margin: auto;
+
+}
+
+.round-winner{
+    margin-top:20px;
+    margin-bottom:20px;
+}

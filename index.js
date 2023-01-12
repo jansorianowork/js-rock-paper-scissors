@@ -6,6 +6,9 @@ const getComputerChoice =()=>{
     const randomizeOption = Math.floor(Math.random() * compOptions.length)
 
    const randomRes = compOptions[randomizeOption]
+    
+     let computerImageHandler =  document.getElementById("computer-choice-img")
+     computerImageHandler.src=`./images/${randomRes}.png`
 
    return randomRes
 }
@@ -123,6 +126,7 @@ startRestart.addEventListener('click',()=>{
 const playRoundCount=(roundCounter)=>{
     if (roundCounter>=5){
         document.getElementsByClassName("round-winner")[0].innerHTML = ""
+        document.getElementsByClassName("game-winner")[0].innerHTML = ""
         rock.removeAttribute('disabled')
         paper.removeAttribute('disabled')
         scissors.removeAttribute('disabled')
@@ -138,21 +142,22 @@ const playRoundCount=(roundCounter)=>{
 const winner = ()=>{
 
     if(playerWin>computerWin){
-        document.getElementsByClassName("round-winner")[0].innerHTML = 'You beat the computer';
+        document.getElementsByClassName("game-winner")[0].innerHTML = 'You beat the computer';
     } 
 
     if(computerWin>playerWin){
-        document.getElementsByClassName("round-winner")[0].innerHTML = 'The computer beat you';
+        document.getElementsByClassName("game-winner")[0].innerHTML = 'The computer beat you';
     } 
 
     if(computerWin===playerWin){
-        document.getElementsByClassName("round-winner")[0].innerHTML = 'Draw';
+        document.getElementsByClassName("game-winner")[0].innerHTML = 'Draw';
     } 
 
     console.log("computer:",computerWin,"player:",playerWin,"draw:",drawCount)
     drawCount=0
     playerWin= 0
    computerWin=0
+
     startRestart.textContent="Restart Game"
 }
 //quit game
@@ -170,6 +175,8 @@ const clearGame=()=>{
     playerWin= 0
    computerWin=0
    roundCount=0;
+   document.getElementsByClassName("round-winner")[0].innerHTML = '';
+   document.getElementsByClassName("game-winner")[0].innerHTML = '';
    rock.setAttribute('disabled','')
    paper.setAttribute('disabled','')
    scissors.setAttribute('disabled','')
