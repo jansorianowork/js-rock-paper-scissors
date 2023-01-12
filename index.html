@@ -5,11 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Rock Paper scissors
-        
-    </h1>
-    <script src="index.js"></script>   
+    <h1>Rock Paper Scissors</h1>
+    <div class="game-pad">
+        <div class="player-options">
+            <button id="btn-rock" class="player-option-image" disabled><img src="/images/rock.png" alt="Rock"></button>
+            <button id="btn-paper" class="player-option-image" disabled><img src="/images/paper.png" alt="Paper"/></button>
+            <button id="btn-scissors" class="player-option-image" disabled><img src="./images/scissors.png" alt="Scissors"/></button>
+        </div>
+        <div class="computer-choice">
+            <img id="computer-choice-img" src="./images/computer.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="round-winner">
+    </div>
+
+    <div class="game-winner">
+    </div>
+<div class="game-options">
+    <button id="start-restart">Start Game</button>
+    <button id="quit-game">Quit Game</button>
+</div>
+
+    <script src="index.js" ></script>   
 </body>
 </html>
